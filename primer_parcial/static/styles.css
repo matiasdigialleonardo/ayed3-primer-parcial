@@ -1,0 +1,82 @@
+:root {
+    --default-background-color: #ced4da;
+  }
+
+.navbar {
+    background-color: var(--default-background-color);
+    padding: 10px;
+}
+.navbar a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+}
+form {
+    max-width: 400px;
+    margin: auto;
+}
+label, input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+}
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--default-background-color);
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    padding-top: 20px;
+    margin: 20px;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+.card {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.card-header {
+    padding: 10px 15px;
+    background-color: var(--default-background-color);
+    color: black;
+    border-bottom: 1px solid black;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.card-title {
+    margin-bottom: 0;
+}
+.card-body {
+    padding: 15px;
+}
+.card-subtitle {
+    color: #6c757d;
+    margin-bottom: 10px;
+}
+.list-group {
+    margin-bottom: 0;
+}
+.list-group-item {
+    border: none;
+    padding: 8px;
+}
+.text-muted {
+    color: #6c757d;
+}

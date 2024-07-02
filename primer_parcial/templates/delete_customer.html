@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete Customer</h1>
+    <form action="{{ url_for('delete_customer') }}" method="POST" class="delete-form">
+        <div class="form-group">
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" required class="form-input">
+        </div>
+        
+        <button type="submit" class="btn btn-danger">Delete Customer</button>
+    </form>
+
+
+    {% if message %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endif %}
+
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error }}
+        </div>
+    {% endif %}
+    
+{% endblock %}

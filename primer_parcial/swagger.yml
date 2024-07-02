@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about people and notes"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    Customer:
+      type: "object"
+      required:
+        - lname
+      properties:
+        fname:
+          type: "string"
+        lname:
+          type: "string"
+        status:
+          type: "boolean"
+        email:
+          type: "string"
+  parameters:
+    lname:
+      name: "lname"
+      description: "Last name of the customer to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    order_id:
+      name: "order_id"
+      description: "ID of the order"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+
+paths:
+  /customers:
+    get:
+      operationId: "customers.read_all"
+      tags:
+        - "Customers"
+      summary: "Read the list of customers"
+      responses:
+        "200":
+          description: "Successfully read customers list"
+    post:
+      operationId: "customers.create"
+      tags:
+        - Customers
+      summary: "Create a customer"
+      requestBody:
+          description: "Customer to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "customer"
+                $ref: "#/components/schemas/Customer"
+      responses:
+        "201":
+          description: "Successfully created customer"
+
+  /customers/{lname}:
+    get:
+      operationId: "customers.read_one"
+      tags:
+        - Customer
+      summary: "Read one customer"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully read customer"
+    put:
+      tags:
+        - Customers
+      operationId: "customers.update"
+      summary: "Update a customer"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully updated customer"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "customer"
+              $ref: "#/components/schemas/Customer"
+    delete:
+      tags:
+        - Customers
+      operationId: "customers.delete"
+      summary: "Delete a customer"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "204":
+          description: "Successfully deleted customer"
+  /orders:
+    post:
+      operationId: "orders.create"
+      tags:
+        - Orders
+      summary: "Create an order associated with a customer"
+      requestBody:
+          description: "Order to create"
+          required: True
+          content:
+            application/json:
+              schema:
+                x-body-name: "order"
+                type: "object"
+                properties:
+                  customer_id:
+                    type: "integer"
+                  total_price:
+                    type: "number"
+                    format: "float"
+      responses:
+        "201":
+          description: "Successfully created an order "
+  /orders/{order_id}:
+    get:
+      operationId: "orders.read_one"
+      tags:
+        - Orders
+      summary: "Read one order"
+      parameters:
+        - $ref: "#/components/parameters/order_id"
+      responses:
+        "200":
+          description: "Successfully read one order"
+    put:
+      tags:
+        - Orders
+      operationId: "orders.update"
+      summary: "Update a order"
+      parameters:
+        - $ref: "#/components/parameters/order_id"
+      responses:
+        "200":
+          description: "Successfully updated order"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "order"
+              type: "object"
+              properties:
+                content:
+                  type: "string"
+    delete:
+      tags:
+        - Orders
+      operationId: "orders.delete"
+      summary: "Delete a order"
+      parameters:
+        - $ref: "#/components/parameters/order_id"
+      responses:
+        "204":
+          description: "Successfully deleted order"

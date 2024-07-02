@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Customers and Orders</h1>
+        <hr>
+        
+        {% for customer in customers %}
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{ customer.fname }} {{ customer.lname }}</h3>
+                <p>Email: {{ customer.email }} <br> Status: {% if customer.status %}Active{% else %}Inactive{% endif %}</p>
+            </div>
+            <div class="card-body">
+                {% if customer.orders %}
+                <h6 class="card-subtitle mb-2 text-muted">Orders:</h6>
+                <ul class="list-group">
+                    {% for order in customer.orders %}
+                    <li class="list-group-item">
+                        Order ID: {{ order.id }}<br>
+                        Total Price: ${{ order.total_price }}<br>
+                        Order Date: {{ order.order_date }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p class="card-text">No orders found.</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
